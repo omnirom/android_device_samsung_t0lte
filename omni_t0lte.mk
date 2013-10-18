@@ -1,5 +1,5 @@
 # Copyright (C) 2013 OmniROM Project
-# Copyright (C) 2013 The CyanogenMod Project
+# Copyright (C) 2012 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,12 +16,15 @@
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 
+# Inherit from our custom product configuration
+$(call inherit-product, vendor/omni/config/common.mk)
+
 # This is where we'd set a backup provider if we had one
 #$(call inherit-product, device/sample/products/backup_overlay.mk)
 $(call inherit-product, device/samsung/t0lte/device.mk)
 
 # Discard inherited values and use our own instead.
-PRODUCT_NAME := full_t0lte
+PRODUCT_NAME := omni_t0lte
 PRODUCT_DEVICE := t0lte
 PRODUCT_BRAND := samsung
 PRODUCT_MANUFACTURER := samsung
