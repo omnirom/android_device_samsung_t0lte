@@ -66,3 +66,5 @@ BOARD_SEPOLICY_UNION += \
     ueventd.te \
     wpa_supplicant.te
 
+#TWRP
+DEVICE_RESOLUTION := 720x1280
