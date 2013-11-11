@@ -22,11 +22,5 @@
     "repository":   "android_kernel_samsung_smdk4412",
     "target_path":  "kernel/samsung/smdk4412",
     "revision":     "android-4.4"
-  },
-  {
-    "remote":       "github",
-    "repository":   "DonkeyCoyote/proprietary_vendor_samsung",
-    "target_path":  "vendor/samsung",
-    "revision":     "android-4.4"
   }
 ]
