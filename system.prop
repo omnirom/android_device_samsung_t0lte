@@ -18,3 +18,9 @@ persist.radio.add_power_save=1
 
 # System property for SIM
 persist.radio.apm_sim_not_pwdn=1
+
+ro.device.cpu=Quad-core 1.6 GHz
+ro.device.gpu=Mali-400MP
+ro.device.rear_cam=8 MP
+ro.device.front_cam=1.9 MP
+ro.device.screen_res=5.5 inch 720p
