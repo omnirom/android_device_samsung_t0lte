@@ -66,5 +66,8 @@ BOARD_SEPOLICY_UNION += \
     ueventd.te \
     wpa_supplicant.te
 
-#TWRP
+# TWRP
 DEVICE_RESOLUTION := 720x1280
+
+# Compatibility with pre-kitkat sensor blobs
+BOARD_IGNORE_DERIVED_HAL_SENSORS := true
