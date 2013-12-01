@@ -165,4 +165,10 @@
     <!-- Boolean to enable Stylus gestures
     <bool name="config_stylusGestures">true</bool> -->
 
+    <!-- Enable lockscreen translucent decor -->
+    <bool name="config_enableLockScreenTranslucentDecor">true</bool>
+
+    <!-- If this is true, key chords can be used to take a screen record on the device. -->
+    <bool name="config_enableScreenrecordChord">false</bool>
+
 </resources>
