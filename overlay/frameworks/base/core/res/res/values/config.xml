@@ -171,4 +171,7 @@
     <!-- If this is true, key chords can be used to take a screen record on the device. -->
     <bool name="config_enableScreenrecordChord">false</bool>
 
+    <!-- Boolean indicating whether the start command should be called on the wireless interface  when starting the SoftAp -->
+    <bool name="config_wifiApStartInterface">true</bool>
+
 </resources>
