@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b8b61a3_fa2720b0",
+        "filename": "overlay/packages/apps/Camera2/res/values/config.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000060
+      },
+      "writtenOn": "2013-12-12T11:47:38Z",
+      "side": 1,
+      "message": "t0lte has a qcom camera?",
+      "revId": "8e8d35bf5d4fa2d8cc2cd8a8ef832e8852590be8",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    }
+  ]
+}
