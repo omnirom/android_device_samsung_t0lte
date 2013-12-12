@@ -183,7 +183,7 @@
          config to 7. -->
     <integer name="config_deviceHardwareKeys">7</integer>
     
-    <!-- Boolean to enable Stylus gestures
-    <bool name="config_stylusGestures">true</bool> -->
+    <!-- Boolean to enable Stylus gestures -->
+    <bool name="config_stylusGestures">true</bool>
 
 </resources>
