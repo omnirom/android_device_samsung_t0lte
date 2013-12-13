@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b8b61a3_f5b733d2",
+        "filename": "overlay-cdma/frameworks/base/core/res/res/values/config.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2013-12-13T22:02:41Z",
+      "side": 1,
+      "message": "this is already true in base",
+      "revId": "0d14f99a19ca6daf9da2cf3e4630af718d94e734",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6b8b61a3_b5a5ab9d",
+        "filename": "overlay-cdma/packages/apps/Settings/res/values/config.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2013-12-13T22:02:41Z",
+      "side": 1,
+      "message": "this is not supported im omni at the moment",
+      "revId": "0d14f99a19ca6daf9da2cf3e4630af718d94e734",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6b8b61a3_d5b237e5",
+        "filename": "overlay/packages/apps/Settings/res/values/config.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2013-12-13T22:02:41Z",
+      "side": 1,
+      "message": "Not supported in omni at the moment",
+      "revId": "0d14f99a19ca6daf9da2cf3e4630af718d94e734",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    }
+  ]
+}
