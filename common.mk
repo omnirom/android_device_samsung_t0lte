@@ -38,10 +38,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     camera.smdk4x12
 
-# Product specific Packages
-PRODUCT_PACKAGES += \
-    DeviceSettings
-
 # Sensors
 PRODUCT_PACKAGES += \
     sensors.smdk4x12
@@ -62,7 +58,8 @@ PRODUCT_COPY_FILES += \
     packages/apps/Nfc/migrate_nfc.txt:system/etc/updatecmds/migrate_nfc.txt \
     frameworks/base/nfc-extras/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
-    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml
+    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
+    frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml
 
 # NFCEE access control
 ifeq ($(TARGET_BUILD_VARIANT),user)
@@ -76,8 +73,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
     com.android.nfc_extras \
-    Stk \
-    SamsungServiceMode
+    Stk
 
 # RIL
 PRODUCT_PROPERTY_OVERRIDES += \
