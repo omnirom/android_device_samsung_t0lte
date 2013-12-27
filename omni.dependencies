@@ -22,5 +22,11 @@
     "repository":   "android_kernel_samsung_smdk4412",
     "target_path":  "kernel/samsung/smdk4412",
     "revision":     "android-4.4"
+  },
+  {
+    "remote":       "omnirom",
+    "repository":   "android_packages_apps_SamsungServiceMode",
+    "target_path":  "packages/apps/SamsungServiceMode",
+    "revision":     "android-4.4"
   }
 ]
