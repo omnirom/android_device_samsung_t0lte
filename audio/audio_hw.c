@@ -366,7 +366,6 @@ static int set_route_by_array(struct mixer *mixer, struct route_setting *route,
 void select_devices(struct m0_audio_device *adev)
 {
     int i;
-
     if (adev->active_out_device == adev->out_device && adev->active_in_device == adev->in_device)
     return;
 
@@ -375,27 +374,31 @@ void select_devices(struct m0_audio_device *adev)
 
     /* Turn on new devices first so we don't glitch due to powerdown... */
     for (i = 0; i < adev->num_dev_cfgs; i++)
-    if ((adev->out_device & adev->dev_cfgs[i].mask) &&
-        !(adev->active_out_device & adev->dev_cfgs[i].mask))
+    if (((adev->out_device & adev->dev_cfgs[i].mask) &&
+        !(adev->active_out_device & adev->dev_cfgs[i].mask)) &&
+        !(adev->dev_cfgs[i].mask & AUDIO_DEVICE_BIT_IN))
         set_route_by_array(adev->mixer, adev->dev_cfgs[i].on,
                    adev->dev_cfgs[i].on_len);
 
     for (i = 0; i < adev->num_dev_cfgs; i++)
-    if ((adev->in_device & adev->dev_cfgs[i].mask) &&
-        !(adev->active_in_device & adev->dev_cfgs[i].mask))
+    if (((adev->in_device & adev->dev_cfgs[i].mask) &&
+        !(adev->active_in_device & adev->dev_cfgs[i].mask)) &&
+        (adev->dev_cfgs[i].mask & AUDIO_DEVICE_BIT_IN))
         set_route_by_array(adev->mixer, adev->dev_cfgs[i].on,
                    adev->dev_cfgs[i].on_len);
 
     /* ...then disable old ones. */
     for (i = 0; i < adev->num_dev_cfgs; i++)
-    if (!(adev->out_device & adev->dev_cfgs[i].mask) &&
-        (adev->active_out_device & adev->dev_cfgs[i].mask))
+    if ((!(adev->out_device & adev->dev_cfgs[i].mask) &&
+        (adev->active_out_device & adev->dev_cfgs[i].mask)) &&
+        !(adev->dev_cfgs[i].mask & AUDIO_DEVICE_BIT_IN))
         set_route_by_array(adev->mixer, adev->dev_cfgs[i].off,
                    adev->dev_cfgs[i].off_len);
 
     for (i = 0; i < adev->num_dev_cfgs; i++)
-    if (!(adev->in_device & adev->dev_cfgs[i].mask) &&
-        (adev->active_in_device & adev->dev_cfgs[i].mask))
+    if ((!(adev->in_device & adev->dev_cfgs[i].mask) &&
+        (adev->active_in_device & adev->dev_cfgs[i].mask)) &&
+        (adev->dev_cfgs[i].mask & AUDIO_DEVICE_BIT_IN))
         set_route_by_array(adev->mixer, adev->dev_cfgs[i].off,
                    adev->dev_cfgs[i].off_len);
 
@@ -825,9 +828,9 @@ static void select_input_device(struct m0_audio_device *adev)
             ALOGD("%s: AUDIO_DEVICE_IN_BUILTIN_MIC", __func__);
             break;
         case AUDIO_DEVICE_IN_BACK_MIC:
-            ALOGD("%s: AUDIO_DEVICE_IN_BACK_MIC", __func__);
             // Force use both mics for video recording
             adev->in_device = (AUDIO_DEVICE_IN_BACK_MIC | AUDIO_DEVICE_IN_BUILTIN_MIC) & ~AUDIO_DEVICE_BIT_IN;
+            ALOGD("%s: AUDIO_DEVICE_IN_BACK_MIC and AUDIO_DEVICE_IN_BUILTIN_MIC", __func__);
             break;
         case AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET:
             ALOGD("%s: AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET", __func__);
@@ -2958,8 +2961,8 @@ static const struct {
     { AUDIO_DEVICE_OUT_SPEAKER, "speaker" },
     { AUDIO_DEVICE_OUT_WIRED_HEADSET | AUDIO_DEVICE_OUT_WIRED_HEADPHONE, "headphone" },
     { AUDIO_DEVICE_OUT_EARPIECE, "earpiece" },
-    { AUDIO_DEVICE_OUT_ANLG_DOCK_HEADSET, "dock" },
-    { AUDIO_DEVICE_OUT_DGTL_DOCK_HEADSET, "dock" },
+    { AUDIO_DEVICE_OUT_ANLG_DOCK_HEADSET, "analogue-dock" },
+    { AUDIO_DEVICE_OUT_DGTL_DOCK_HEADSET, "digital-dock" },
     { AUDIO_DEVICE_OUT_ALL_SCO, "sco-out" },
     { AUDIO_DEVICE_OUT_AUX_DIGITAL, "aux-digital" },
 
