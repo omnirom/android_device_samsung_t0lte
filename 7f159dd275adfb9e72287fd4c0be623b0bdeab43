@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8b77b57d_93437344",
+        "filename": "libsensors/SensorBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2014-02-27T14:44:39Z",
+      "side": 1,
+      "message": "looks like some tabs (instead of spaces) crept in here.",
+      "revId": "7f159dd275adfb9e72287fd4c0be623b0bdeab43",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    }
+  ]
+}
