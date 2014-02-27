@@ -174,4 +174,3 @@ again:
 
     return numEventReceived;
 }
-
