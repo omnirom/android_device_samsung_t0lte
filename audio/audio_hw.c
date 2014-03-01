@@ -687,19 +687,7 @@ static void select_mode(struct m0_audio_device *adev)
             }
 
             force_all_standby(adev);
-
-            ALOGD("%s: set voicecall route: voicecall_default_disable", __func__);
-            set_voicecall_route_by_array(adev->mixer, voicecall_default_disable, 1);
-            ALOGD("%s: set voicecall route: default_input_disable", __func__);
-            set_voicecall_route_by_array(adev->mixer, default_input_disable, 1);
-            ALOGD("%s: set voicecall route: headset_input_disable", __func__);
-            set_voicecall_route_by_array(adev->mixer, headset_input_disable, 1);
-            ALOGD("%s: set voicecall route: bt_disable", __func__);
-            set_voicecall_route_by_array(adev->mixer, bt_disable, 1);
-
             select_output_device(adev);
-            //Force Input Standby
-            adev->in_device = AUDIO_DEVICE_NONE;
             select_input_device(adev);
         }
     }
@@ -3115,15 +3103,19 @@ static int adev_config_parse(struct m0_audio_device *adev)
     struct config_parse_state s;
     FILE *f;
     XML_Parser p;
+    char property[PROPERTY_VALUE_MAX];
+    char file[80];
     int ret = 0;
     bool eof = false;
     int len;
-    char buf[1024];
 
-    ALOGV("Reading configuration from %s\n", CONFIG_FILE);
-    f = fopen(CONFIG_FILE, "r");
+    property_get("ro.product.device", property, "tiny_hw");
+    snprintf(file, sizeof(file), "/system/etc/sound/%s", property);
+
+    ALOGV("Reading configuration from %s\n", file);
+    f = fopen(file, "r");
     if (!f) {
-    ALOGE("Failed to open %s\n", CONFIG_FILE);
+    ALOGE("Failed to open %s\n", file);
     return -ENODEV;
     }
 
@@ -3141,7 +3133,7 @@ static int adev_config_parse(struct m0_audio_device *adev)
     XML_SetElementHandler(p, adev_config_start, adev_config_end);
 
     while (!eof) {
-    len = fread(buf, 1, sizeof(buf), f);
+    len = fread(file, 1, sizeof(file), f);
     if (ferror(f)) {
         ALOGE("I/O error reading config\n");
         ret = -EIO;
@@ -3149,7 +3141,7 @@ static int adev_config_parse(struct m0_audio_device *adev)
     }
     eof = feof(f);
 
-    if (XML_Parse(p, buf, len, eof) == XML_STATUS_ERROR) {
+    if (XML_Parse(p, file, len, eof) == XML_STATUS_ERROR) {
         ALOGE("Parse error at line %u:\n%s\n",
          (unsigned int)XML_GetCurrentLineNumber(p),
          XML_ErrorString(XML_GetErrorCode(p)));
@@ -3214,7 +3206,7 @@ static int adev_open(const hw_module_t* module, const char* name,
     pthread_mutex_lock(&adev->lock);
     adev->mode = AUDIO_MODE_NORMAL;
     adev->out_device = AUDIO_DEVICE_OUT_SPEAKER;
-    adev->in_device = AUDIO_DEVICE_NONE;
+    adev->in_device = AUDIO_DEVICE_IN_BUILTIN_MIC & ~AUDIO_DEVICE_BIT_IN;
     select_devices(adev);
 
     /* +30db boost for mics */
