@@ -9,7 +9,7 @@ We are able to have most of our routing static so do that
     <ctl name="AIF2DACR Source" val="0"/>
     <ctl name="AIF2ADCL Source" val="0"/>
     <ctl name="AIF2ADCR Source" val="1"/>
-    
+
     <!-- AIF1->DAC1 -->
     <ctl name="DAC1 Switch" val="1"/>
 
