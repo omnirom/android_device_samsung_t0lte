@@ -211,7 +211,6 @@ static int (*csd_wide_voice)(uint8_t);
 static int (*csd_slow_talk)(uint8_t);
 static int (*csd_fens)(uint8_t);
 static int (*csd_volume_index)(int);
-static int (*csd_volume)(int);
 static int (*csd_start_voice)(int,int,int);
 static int (*csd_stop_voice)(int);
 static int (*csd_client_volume)(int);
@@ -537,7 +536,7 @@ static void set_incall_device(struct m0_audio_device *adev)
         case AUDIO_DEVICE_OUT_EARPIECE:
             rx_dev_id = DEVICE_HANDSET_RX_ACDB_ID;
             tx_dev_id = DEVICE_HANDSET_TX_ACDB_ID;
-            voice_index = 6;
+            voice_index = 5;
             break;
         case AUDIO_DEVICE_OUT_SPEAKER:
         case AUDIO_DEVICE_OUT_ANLG_DOCK_HEADSET:
@@ -545,13 +544,13 @@ static void set_incall_device(struct m0_audio_device *adev)
         case AUDIO_DEVICE_OUT_AUX_DIGITAL:
             rx_dev_id = DEVICE_SPEAKER_MONO_RX_ACDB_ID;
             tx_dev_id = DEVICE_SPEAKER_TX_ACDB_ID;
-            voice_index = 7;
+            voice_index = 9;
             break;
         case AUDIO_DEVICE_OUT_WIRED_HEADSET:
         case AUDIO_DEVICE_OUT_WIRED_HEADPHONE:
             rx_dev_id = DEVICE_HEADSET_RX_ACDB_ID;
             tx_dev_id = DEVICE_HEADSET_TX_ACDB_ID;
-            voice_index = 6;
+            voice_index = 5;
             break;
         case AUDIO_DEVICE_OUT_BLUETOOTH_SCO:
         case AUDIO_DEVICE_OUT_BLUETOOTH_SCO_HEADSET:
@@ -568,7 +567,7 @@ static void set_incall_device(struct m0_audio_device *adev)
         default:
             rx_dev_id = DEVICE_HANDSET_RX_ACDB_ID;
             tx_dev_id = DEVICE_HANDSET_TX_ACDB_ID;
-            voice_index = 6;
+            voice_index = 5;
             break;
     }
 
@@ -810,7 +809,9 @@ static void select_output_device(struct m0_audio_device *adev)
 
 static void select_input_device(struct m0_audio_device *adev)
 {
-    switch(adev->in_device) {
+    int input_device = AUDIO_DEVICE_BIT_IN | adev->in_device;
+
+    switch(input_device) {
         case AUDIO_DEVICE_IN_BUILTIN_MIC:
             ALOGD("%s: AUDIO_DEVICE_IN_BUILTIN_MIC", __func__);
             break;
