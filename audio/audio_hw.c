@@ -684,8 +684,19 @@ static void select_mode(struct m0_audio_device *adev)
                     ALOGE("%s: csd_stop_voice error %d\n", __func__, err);
                 }
             }
-
+            //Force Input Standby
+            adev->in_device = AUDIO_DEVICE_NONE;
             force_all_standby(adev);
+
+            ALOGD("%s: set voicecall route: voicecall_default_disable", __func__);
+            set_bigroute_by_array(adev->mixer, voicecall_default_disable, 1);
+            ALOGD("%s: set voicecall route: default_input_disable", __func__);
+            set_bigroute_by_array(adev->mixer, default_input_disable, 1);
+            ALOGD("%s: set voicecall route: headset_input_disable", __func__);
+            set_bigroute_by_array(adev->mixer, headset_input_disable, 1);
+            ALOGD("%s: set voicecall route: bt_disable", __func__);
+            set_bigroute_by_array(adev->mixer, bt_disable, 1);
+
             select_output_device(adev);
             select_input_device(adev);
         }
