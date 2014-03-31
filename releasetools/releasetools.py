@@ -1,4 +1,5 @@
-# Copyright (C) 2013 OmniROM Project
+# Copyright (C) 2012 The Android Open Source Project
+# Copyright (C) 2013 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,19 +12,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
 
-# Inherit from our omni product configuration
-$(call inherit-product, vendor/omni/config/common.mk)
+"""Custom OTA commands for t0lte devices"""
 
-# Inherit device configuration
-$(call inherit-product, device/samsung/t0lte/full_t0lte.mk)
-
-# Discard inherited values and use our own instead
-PRODUCT_NAME := omni_t0lte
-PRODUCT_DEVICE := t0lte
-
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRODUCT_NAME=t0lte \
-    TARGET_DEVICE=t0lte \
-    BUILD_FINGERPRINT="xxxxxxx" \
-    PRIVATE_BUILD_DESC="xxxxxxx" \
+def FullOTA_InstallEnd(info):
+    info.script.AppendExtra('package_extract_file("system/bin/variant.sh", "/tmp/variant.sh");')
+    info.script.AppendExtra('set_perm(0, 0, 0777, "/tmp/variant.sh");')
+    info.script.AppendExtra('run_program("/tmp/variant.sh");')
+    info.script.AppendExtra('delete("/system/bin/variant.sh");')
