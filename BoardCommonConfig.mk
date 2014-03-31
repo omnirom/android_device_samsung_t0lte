@@ -31,18 +31,22 @@ COMMON_GLOBAL_CFLAGS += -DCAMERA_WITH_CITYID_PARAM
 
 # Kernel
 TARGET_KERNEL_SOURCE := kernel/samsung/smdk4412
-ifeq ($(TARGET_VOICE_TECH), cdma)
-TARGET_KERNEL_CONFIG := custom_t0ltecdma_defconfig
-else
 TARGET_KERNEL_CONFIG := custom_t0lte_defconfig
-endif
 
 # Recovery
 TARGET_RECOVERY_FSTAB := device/samsung/t0lte/rootdir/fstab.smdk4x12
 RECOVERY_FSTAB_VERSION := 2
 
 # assert
-TARGET_OTA_ASSERT_DEVICE := t0lte,t0ltexx,GT-N7105,t0ltedv,GT-N7105T,t0lteatt,SGH-I317,t0ltetmo,SGH-T889,t0ltecan,t0ltevl,SGH-I317M
+TARGET_OTA_ASSERT_DEVICE :=     \
+    GT-N7105,GT-N7105T          \
+    t0lte,t0ltecdma,t0ltexx     \
+    t0lteatt,i317,SGH-I317      \
+    t0ltetmo,t889,SGH-T889      \
+    t0ltevzw,i605,SCH-I605      \
+    t0ltespr,l900,SPH-L900      \
+    t0ltecan,t0ltevl,SGH-I317M  \
+    t0lteusc,t0ltedv,SCH-R950
 
 # Selinux
 BOARD_SEPOLICY_DIRS += \
