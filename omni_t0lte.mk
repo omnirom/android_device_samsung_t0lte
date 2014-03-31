@@ -12,23 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Inherit Omni GSM telephony parts
-$(call inherit-product, vendor/omni/config/gsm.mk)
-
 # Inherit from our omni product configuration
 $(call inherit-product, vendor/omni/config/common.mk)
 
 # Inherit device configuration
 $(call inherit-product, device/samsung/t0lte/full_t0lte.mk)
 
-# Discard inherited values and use our own instead.
+# Discard inherited values and use our own instead
 PRODUCT_NAME := omni_t0lte
 PRODUCT_DEVICE := t0lte
-PRODUCT_BRAND := samsung
-PRODUCT_MANUFACTURER := samsung
-PRODUCT_MODEL := T0LTE
+
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    BUILD_FINGERPRINT="samsung/t0ltexx/t0lte:4.3/JSS15J/N7105XXUENA1:user/release-keys" \
-    PRIVATE_BUILD_DESC="t0ltexx-user 4.3 JSS15J N7105XXUENA1 release-keys" \
-    PRODUCT_NAME=t0ltexx \
-    TARGET_DEVICE=t0lte
+    PRODUCT_NAME=t0lte \
+    TARGET_DEVICE=t0lte \
+    BUILD_FINGERPRINT="xxxxxxx" \
+    PRIVATE_BUILD_DESC="xxxxxxx" \

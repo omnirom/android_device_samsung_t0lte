@@ -19,11 +19,57 @@
 -include device/samsung/smdk4412-common/BoardCommonConfig.mk
 -include device/samsung/smdk4412-qcom-common/BoardCommonConfig.mk
 
--include device/samsung/t0lte/BoardCommonConfig.mk
+LOCAL_PATH := device/samsung/t0lte
+
+# Bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
+BOARD_BLUEDROID_VENDOR_CONF := $(LOCAL_PATH)/bluetooth/vnd_t0lte.txt
+
+# RIL
+COMMON_GLOBAL_CFLAGS += -DPROPERTY_PERMS_APPEND='{ "ril.ks.status", AID_SYSTEM, 0 },'
+
+# Camera
+COMMON_GLOBAL_CFLAGS += -DCAMERA_WITH_CITYID_PARAM
+
+# Kernel
+TARGET_KERNEL_SOURCE := kernel/samsung/smdk4412
+TARGET_KERNEL_CONFIG := custom_t0lte_defconfig
+
+# Recovery
+TARGET_RECOVERY_FSTAB := device/samsung/t0lte/rootdir/fstab.smdk4x12
+RECOVERY_FSTAB_VERSION := 2
+
+# assert
+TARGET_OTA_ASSERT_DEVICE := \
+    t0lte,t0ltecdma,t03gxx,GT-N7100,t0ltexx,GT-N7105,t0ltedv,GT-N7105T,t0lteatt,SGH-I317,t0ltetmo,SGH-T889,t0ltecan,t0ltevl,SGH-I317M,t0ltevzw,i605,SCH-I605,t0ltespr,l900,SPH-L900,t0lteusc,r950,SCH-R950
+
+# Selinux
+BOARD_SEPOLICY_DIRS += \
+    device/samsung/t0lte/selinux
+
+BOARD_SEPOLICY_UNION += \
+    file_contexts \
+    te_macros \
+    device.te \
+    dhcp.te \
+    domain.te \
+    file.te \
+    init.te \
+    kickstart.te \
+    mediaserver.te \
+    netmgrd.te \
+    qmux.te \
+    rild.te \
+    secril.te \
+    system.te \
+    ueventd.te \
+    wpa_supplicant.te
+
+# TWRP
+DEVICE_RESOLUTION := 720x1280
 
 # GPS
 BOARD_GPS_SET_PRIVACY := true
 
 # inherit from the proprietary version
 -include vendor/samsung/t0lte/BoardConfigVendor.mk
-

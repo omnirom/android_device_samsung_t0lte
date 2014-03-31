@@ -17,11 +17,7 @@
 LOCAL_PATH := device/samsung/t0lte
 
 # Overlay
-ifeq ($(TARGET_VOICE_TECH), cdma)
-DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay-cdma
-else
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
-endif
 
 # This device is xhdpi.  However the platform doesn't
 # currently contain all of the bitmaps at xhdpi density so
@@ -89,8 +85,23 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
     frameworks/native/data/etc/android.hardware.sensor.barometer.xml:system/etc/permissions/android.hardware.sensor.barometer.xml
 
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
+    frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml
+
+# Variant config
+PRODUCT_COPY_FILES += \
+    device/samsung/t0lte/configs/07variant:system/etc/init.d/07variant
+
+# Init files
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/fstab.smdk4x12:root/fstab.smdk4x12 \
+    $(LOCAL_PATH)/rootdir/init.target.rc:root/init.target.rc \
+    $(LOCAL_PATH)/rootdir/lpm.rc:root/lpm.rc \
+    $(LOCAL_PATH)/rootdir/ueventd.smdk4x12.rc:root/ueventd.smdk4x12.rc
+
 # Include common makefile
 $(call inherit-product, device/samsung/smdk4412-common/common.mk)
 $(call inherit-product, device/samsung/smdk4412-qcom-common/common.mk)
 
-$(call inherit-product-if-exists, vendor/samsung/t0lte/t0lte-common-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/t0lte/t0lte-vendor.mk)
