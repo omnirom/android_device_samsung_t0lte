@@ -21,9 +21,10 @@
 
 -include device/samsung/t0lte/BoardCommonConfig.mk
 
-# GPS
-BOARD_GPS_SET_PRIVACY := true
+TARGET_RECOVERY_FSTAB := device/samsung/t0lte/rootdir/fstab.smdk4x12
+
+# assert
+TARGET_OTA_ASSERT_DEVICE := t0lte,t0ltexx,GT-N7105,t0ltedv,GT-N7105T,t0lteatt,SGH-I317,t0ltetmo,SGH-T889
 
 # inherit from the proprietary version
 -include vendor/samsung/t0lte/BoardConfigVendor.mk
-
