@@ -34,9 +34,9 @@ PRODUCT_AAPT_PREF_CONFIG := xhdpi
 PRODUCT_PACKAGES += \
     tiny_hw
 
-# Camera
+# Camera Wrapper
 PRODUCT_PACKAGES += \
-    camera.smdk4x12
+    camera.exynos4
 
 # Product specific Packages
 PRODUCT_PACKAGES += \

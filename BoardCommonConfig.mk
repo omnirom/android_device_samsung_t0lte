@@ -70,3 +70,6 @@ DEVICE_RESOLUTION := 720x1280
 
 # Compatibility with pre-kitkat Sensor HALs
 SENSORS_NEED_SETRATE_ON_ENABLE := true
+
+# Camera wrapper
+TARGET_PROVIDES_CAMERA_HAL := true
